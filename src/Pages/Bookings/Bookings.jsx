@@ -14,7 +14,7 @@ const Bookings = () => {
       .then((res) => res.json())
       .then((data) => {
         setBookings(data);
-        console.log(data);
+        // console.log(data);
       });
   }, [url]);
 
@@ -46,6 +46,30 @@ const Bookings = () => {
     });
   };
 
+  const handleStatusChange = (id, newStatus) => {
+    fetch(`http://localhost:3000/bookings/${id}`, {
+      method: "PATCH",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          // Swal.fire(
+          //   "Modification Successful",
+          //   `${data?.[0]?.title}`,
+          //   "success"
+          // );
+          const remaining = bookings.filter((booking) => booking._id !== id);
+          const updated = bookings.find((booking) => booking._id === id);
+          updated.status = newStatus;
+          const newBookings = [updated, ...remaining];
+          setBookings(newBookings);
+        }
+        console.log(data);
+      });
+  };
+
   return (
     <div className="max-w-7xl container mx-auto">
       <div className="relative w-full rounded-xl">
@@ -69,6 +93,7 @@ const Bookings = () => {
                 key={booking._id}
                 booking={booking}
                 handleDelete={handleDelete}
+                handleStatusChange={handleStatusChange}
               />
             ))}
           </tbody>

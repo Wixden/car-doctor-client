@@ -5,8 +5,8 @@ import { Element, scroller } from "react-scroll";
 const Services = () => {
   useEffect(() => {
     // Check if the hash is present in the URL
-    const hasHash = window.location.hash;
-    if (hasHash) {
+    const hasServicesHash = window.location.pathname === "#services";
+    if (hasServicesHash) {
       // Scroll to the target section when the component mounts
       scroller.scrollTo("servicesSection", {
         smooth: true,
@@ -25,7 +25,7 @@ const Services = () => {
 
   return (
     <Element name="servicesSection">
-      <div className="max-w-7xl mx-auto container my-20 services">
+      <div className="my-20 p-5">
         <div className="text-center">
           <p className="font-semibold text-xl text-primaryOrange">Service</p>
           <h2 className="text-5xl font-bold my-5">Our Service Area</h2>
@@ -40,9 +40,11 @@ const Services = () => {
             <ServiceCard key={service._id} service={service} />
           ))}
         </div>
-        <button className="text-lg py-4 px-7 rounded-md border text-primaryOrange font-semibold hover:bg-primaryOrange hover:text-neutral-50 duration-300">
-          More Services
-        </button>
+        <div className="text-center">
+          <button className="text-lg py-4 px-7 rounded-md border text-primaryOrange font-semibold hover:bg-primaryOrange hover:text-neutral-50 duration-300">
+            More Services
+          </button>
+        </div>
       </div>
     </Element>
   );

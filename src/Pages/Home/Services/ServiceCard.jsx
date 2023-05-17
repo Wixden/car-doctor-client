@@ -5,7 +5,7 @@ const ServiceCard = ({ service }) => {
   // console.log(service);
   const { _id, img, title, price } = service;
   return (
-    <div className="card w-96 bg-base-100 border border-neutral-200 hover:shadow-2xl  duration-300 flex flex-col justify-between">
+    <div className="card border border-neutral-200 hover:shadow-2xl  duration-300 flex flex-col justify-between">
       <figure className="p-5">
         <img src={img} alt="Shoes" className="rounded-xl object-cover h-full" />
       </figure>

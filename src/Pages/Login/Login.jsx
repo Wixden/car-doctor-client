@@ -1,6 +1,6 @@
 import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import login from "../../assets/images/login/login.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
@@ -8,6 +8,11 @@ const Login = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const { signIn, signInWithGoogle } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   const handleSignIn = (event) => {
     event.preventDefault();
 
@@ -22,6 +27,7 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         setSuccess("Login Successful");
+        navigate(from, { replace: true });
         setError("");
       })
       .catch((err) => {
@@ -35,6 +41,7 @@ const Login = () => {
     signInWithGoogle()
       .then(() => {
         setSuccess("Google Signin Successful");
+        navigate(from, { replace: true });
         setError("");
       })
       .catch((err) => {

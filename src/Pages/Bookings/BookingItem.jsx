@@ -1,5 +1,6 @@
-const BookingItem = ({ booking, handleDelete }) => {
-  const { _id, price, service_image, service_title, bookingDate } = booking;
+const BookingItem = ({ booking, handleDelete, handleStatusChange }) => {
+  const { _id, price, service_image, service_title, bookingDate, status } =
+    booking;
 
   return (
     <tr>
@@ -41,7 +42,29 @@ const BookingItem = ({ booking, handleDelete }) => {
       <td className="font-semibold text-lg">${price ? price : "20.20"}</td>
       <td>{bookingDate}</td>
       <th>
-        <button className="btn btn-ghost btn-xs">status</button>
+        <select
+          className={`select px-10 space-y-5 ${
+            status === "Approved"
+              ? "py-2 px-6 border border-green-400 rounded-lg font-semibold text-green-600 text-center"
+              : "py-2 px-5 border border-primaryOrange rounded-lg font-semibold text-primaryOrange text-center"
+          }`}
+          value={status}
+          onChange={(e) => {
+            const statusValue = e.target.value;
+            handleStatusChange(_id, statusValue);
+          }}
+        >
+          <option
+            value="Approved"
+            selected={status === "Approved"}
+            className="px-3 py-2"
+          >
+            Approved
+          </option>
+          <option value="Pending" selected={status === "Pending"}>
+            Pending
+          </option>
+        </select>
       </th>
     </tr>
   );

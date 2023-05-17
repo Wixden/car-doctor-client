@@ -4,7 +4,7 @@ import location from "../../../assets/icons/location.svg";
 
 const CallToAction = () => {
   return (
-    <div className="bg-[#151515] px-16 py-24 rounded-xl  flex justify-between items-center">
+    <div className="bg-[#151515] px-16 py-24 rounded-xl  grid grid-cols-1 md:grid-cols-3">
       <div className="text-white flex gap-5 items-center">
         <img src={calendar} alt="Opening hours Calendar icon" />
         <div>
